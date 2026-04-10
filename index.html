@@ -45,6 +45,7 @@
         radial-gradient(circle at top right, rgba(96, 165, 250, 0.16), transparent 24%),
         linear-gradient(180deg, #030712 0%, #07111f 38%, #08121e 100%);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     a {
@@ -192,6 +193,10 @@
       font-size: 15px;
       font-weight: 800;
       transition: transform 0.16s ease, opacity 0.2s ease, border-color 0.2s ease;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .button:hover {
@@ -552,6 +557,7 @@
     .exercise-main span {
       font-size: 13px;
       color: var(--muted);
+      text-transform: capitalize;
     }
 
     .exercise-time {
@@ -581,6 +587,48 @@
       padding-left: 18px;
       color: var(--muted);
       line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .lead-box {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148,163,184,0.12);
+    }
+
+    .lead-box p {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .lead-box .small {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pro-offer {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), rgba(96, 165, 250, 0.08));
+      border: 1px solid rgba(96, 165, 250, 0.16);
+    }
+
+    .pro-offer h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .pro-offer p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
       font-size: 14px;
     }
 
@@ -675,6 +723,11 @@
       h1 {
         font-size: 40px;
         max-width: 100%;
+      }
+
+      .exercise-item {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -872,16 +925,22 @@
             </div>
           </form>
 
-          <div style="margin-top:22px; padding:16px; border-radius:16px; background:rgba(255,255,255,0.03); border:1px solid rgba(148,163,184,0.12);">
-            <p style="margin-bottom:10px; font-size:14px; color:#cbd5e1;">
-              👉 Szeretnél egy haladóbb, részletesebb edzéstervet + tippeket?
-              Add meg az emailed és elküldjük.
+          <div class="lead-box" id="email-form">
+            <p>
+              👉 Szeretnél egy részletesebb, letölthető <strong>PRO edzéstervet PDF-ben</strong> +
+              extra tippeket a biztosabb induláshoz? Add meg az emailed, és küldés után megnyílik a PDF.
             </p>
 
-            <form action="https://formspree.io/f/abcd1234" method="POST">
-              <input 
-                type="email" 
-                name="email" 
+            <form
+              action="https://formspree.io/f/abcd1234"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="Új FormaStart lead" />
+              <input type="hidden" name="_next" value="https://teoldalad.netlify.app/formastart-pro.pdf" />
+
+              <input
+                type="email"
+                name="email"
                 placeholder="Add meg az email címed"
                 required
                 style="
@@ -892,12 +951,17 @@
                   border:1px solid rgba(148,163,184,0.2);
                   background:rgba(3,9,19,0.6);
                   color:white;
+                  outline:none;
                 "
               />
 
               <button type="submit" class="button button-primary" style="width:100%;">
-                🔥 Kérem az extra tervet
+                🔥 Kérem a PRO PDF-et
               </button>
+
+              <div class="small">
+                Ingyenes első verzió. Később jöhetnek részletesebb, haladóbb programok is.
+              </div>
             </form>
           </div>
 
@@ -928,7 +992,7 @@
         <div class="cta-card">
           <h3>Most már tesztelhető</h3>
           <p>
-            Tedd fel Hostingerre, küldd át 5–10 ismerősnek, és figyeld meg, meddig jutnak el: görgetnek-e, kitöltik-e, rányomnak-e a generálásra, és mennyire érzik egyszerűnek az indulást.
+            Tedd fel Netlify-ra, küldd át 5–10 ismerősnek, és figyeld meg, meddig jutnak el: görgetnek-e, kitöltik-e, rányomnak-e a generálásra, és mennyire érzik egyszerűnek az indulást.
           </p>
         </div>
       </section>
@@ -984,6 +1048,17 @@
       hát: ["Mountain climber", "Russian twist", "Hasprés"],
       egyéb: []
     };
+
+    const PDF_ANCHOR_HTML = `
+      <div class="pro-offer">
+        <h3>🔥 Részletesebb PRO verzió</h3>
+        <p>
+          Kérd el a letölthető PDF edzéstervet emailért cserébe. Ez jó következő lépés,
+          ha szeretnél egy külön menthető, később is újranyitható verziót.
+        </p>
+        <a href="#email-form" class="button button-primary">Kérem a PRO PDF-et</a>
+      </div>
+    `;
 
     function shuffle(array) {
       const copied = [...array];
@@ -1069,6 +1144,7 @@
     function pickExercises(pool, focusTypes, count) {
       const selected = [];
       const usedNames = new Set();
+
       for (const type of focusTypes) {
         const options = shuffle(pool.filter(ex => ex.type === type && !usedNames.has(ex.name)));
         if (options.length > 0) {
@@ -1077,6 +1153,7 @@
         }
         if (selected.length >= count) break;
       }
+
       if (selected.length < count) {
         const filler = shuffle(pool.filter(ex => !usedNames.has(ex.name)));
         for (const ex of filler) {
@@ -1085,6 +1162,7 @@
           if (selected.length >= count) break;
         }
       }
+
       return selected.slice(0, count);
     }
 
@@ -1095,6 +1173,7 @@
     function createWorkoutDay(dayType, pool, timeConfig, goal, dayIndex) {
       const focusTypes = getFocusTypes(dayType, goal);
       const exercises = pickExercises(pool, focusTypes, timeConfig.exercisesPerDay);
+
       return {
         day: getDayLabel(dayIndex),
         type: dayType,
@@ -1129,7 +1208,9 @@
           injury: profile.injury,
           bmi: calculateBMI(profile.weight, profile.height)
         },
-        weeklyPlan: structure.map((dayType, index) => createWorkoutDay(dayType, pool, timeConfig, profile.goal, index)),
+        weeklyPlan: structure.map((dayType, index) =>
+          createWorkoutDay(dayType, pool, timeConfig, profile.goal, index)
+        ),
         notes: [
           "Minden edzés előtt 3–5 perc bemelegítés javasolt.",
           "Minden edzés után 2–5 perc nyújtás javasolt.",
@@ -1166,6 +1247,7 @@
 
     function renderPlan(plan) {
       const resultPanel = document.getElementById("resultPanel");
+
       const planHtml = plan.weeklyPlan.map(day => {
         const exercises = day.exercises.map(ex => `
           <div class="exercise-item">
@@ -1210,6 +1292,8 @@
           <h3>Fontos megjegyzések</h3>
           <ul>${plan.notes.map(note => `<li>${escapeHtml(note)}</li>`).join("")}</ul>
         </div>
+
+        ${PDF_ANCHOR_HTML}
       `;
     }
 
@@ -1266,21 +1350,51 @@
       document.getElementById("daysPerWeek").value = 3;
       document.getElementById("minutesPerWorkout").value = 20;
       document.getElementById("injury").value = "nincs";
+
+      const resultPanel = document.getElementById("resultPanel");
+      resultPanel.innerHTML = `
+        <div class="result-placeholder">
+          <div class="result-placeholder-box">
+            <h3>Még nincs generált terved</h3>
+            <p>
+              Töltsd ki a kérdőívet, és itt megjelenik egy modern, heti bontású, kezdőbarát edzésterv, amit rögtön tesztelhetsz.
+            </p>
+          </div>
+        </div>
+      `;
+
+      localStorage.removeItem("formastart_last_profile");
+      localStorage.removeItem("formastart_last_plan");
     }
 
     document.getElementById("workoutForm").addEventListener("submit", function (event) {
       event.preventDefault();
+
       const profile = getProfileFromForm();
       const error = validateProfile(profile);
+
       if (error) {
         alert(error);
         return;
       }
-      const plan = generateWeeklyPlan(profile);
-      renderPlan(plan);
-      localStorage.setItem("formastart_last_profile", JSON.stringify(profile));
-      localStorage.setItem("formastart_last_plan", JSON.stringify(plan));
-      document.getElementById("resultPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+
+      const resultPanel = document.getElementById("resultPanel");
+      resultPanel.innerHTML = `
+        <div class="result-placeholder">
+          <div class="result-placeholder-box">
+            <h3>Terved készül... 🔥</h3>
+            <p>Pár pillanat, és már mutatom is a heti felosztást.</p>
+          </div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        const plan = generateWeeklyPlan(profile);
+        renderPlan(plan);
+        localStorage.setItem("formastart_last_profile", JSON.stringify(profile));
+        localStorage.setItem("formastart_last_plan", JSON.stringify(plan));
+        document.getElementById("resultPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 700);
     });
 
     document.getElementById("fillDemo").addEventListener("click", fillDemoData);

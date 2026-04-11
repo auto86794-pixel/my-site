@@ -583,6 +583,32 @@
       font-size: 14px;
     }
 
+    .upsell-card {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .upsell-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .upsell-card p,
+    .upsell-card li {
+      color: #cbd5e1;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .upsell-card ul {
+      padding-left: 18px;
+      margin: 12px 0 0;
+    }
+
     .bottom-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -626,31 +652,6 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
-    }
-
-    .upsell-box {
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 20px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.2);
-    }
-
-    .upsell-box h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-
-    .upsell-box p,
-    .upsell-box ul {
-      color: #cbd5e1;
-      line-height: 1.7;
-    }
-
-    .upsell-box ul {
-      padding-left: 18px;
-      margin: 12px 0 0;
     }
 
     @media (max-width: 1080px) {
@@ -701,9 +702,12 @@
         max-width: 100%;
       }
 
-      .exercise-item {
+      .button-row {
         flex-direction: column;
-        align-items: flex-start;
+      }
+
+      .button-row .button {
+        width: 100%;
       }
     }
   </style>
@@ -793,3 +797,606 @@
         <article class="feature-card">
           <div class="feature-icon">🎯</div>
           <h3>Nem motivációra épít</h3>
+          <p>
+            Az indulás a legnehezebb. Ez a felület leveszi rólad a döntési terhet, és rögtön ad egy használható heti tervet.
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🧩</div>
+          <h3>Kezdőkre optimalizálva</h3>
+          <p>
+            Egyszerű gyakorlatokkal, rövid blokkokkal és kímélőbb felépítéssel támogatja azokat, akik most kezdenének bele.
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Azonnal kipróbálható</h3>
+          <p>
+            Nem kell regisztráció és nincs bonyolult setup. Kitöltöd, generálod, és már indulhat is az első hét.
+          </p>
+        </article>
+      </div>
+
+      <section class="workspace" id="terv">
+        <div class="form-card">
+          <h2 class="section-title">Kérdőív</h2>
+          <p class="section-subtitle">
+            Add meg az alapadatokat, és elkészítjük a személyre szabott heti tervet. Ez az MVP jelenleg szabályalapú logikával működik.
+          </p>
+
+          <form id="workoutForm">
+            <div class="field-grid">
+              <div class="field">
+                <label for="gender">Nem</label>
+                <select id="gender" required>
+                  <option value="nő">Nő</option>
+                  <option value="férfi">Férfi</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="age">Életkor</label>
+                <input id="age" type="number" min="16" max="80" value="29" required />
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="weight">Testsúly (kg)</label>
+                <input id="weight" type="number" min="35" max="250" value="78" required />
+              </div>
+              <div class="field">
+                <label for="height">Magasság (cm)</label>
+                <input id="height" type="number" min="130" max="220" value="168" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="goal">Cél</label>
+              <select id="goal" required>
+                <option value="fogyás">Fogyás</option>
+                <option value="formálódás">Zsírégetés + formálódás</option>
+                <option value="mozgás_elkezdése">Mozgás elkezdése</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="level">Edzettségi szint</label>
+              <select id="level" required>
+                <option value="teljesen_kezdő">Teljesen kezdő</option>
+                <option value="volt_már_próbálkozás">Volt már próbálkozás</option>
+                <option value="újrakezdő">Újrakezdő</option>
+              </select>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="daysPerWeek">Heti hány nap tudsz edzeni?</label>
+                <select id="daysPerWeek" required>
+                  <option value="2">2 nap</option>
+                  <option value="3" selected>3 nap</option>
+                  <option value="4">4 nap</option>
+                  <option value="5">5 nap</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="minutesPerWorkout">Egy edzésre mennyi időd van?</label>
+                <select id="minutesPerWorkout" required>
+                  <option value="15">15 perc</option>
+                  <option value="20" selected>20 perc</option>
+                  <option value="30">30 perc</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="injury">Sérülés vagy érzékeny terület</label>
+              <select id="injury" required>
+                <option value="nincs">Nincs</option>
+                <option value="térd">Térd</option>
+                <option value="hát">Hát</option>
+                <option value="egyéb">Egyéb</option>
+              </select>
+            </div>
+
+            <div class="button-row">
+              <button type="submit" class="button button-primary">Edzésterv generálása</button>
+              <button type="button" class="button button-secondary" id="fillDemo">Demó adatok</button>
+              <button type="button" class="button button-secondary" id="clearBtn">Alaphelyzet</button>
+            </div>
+          </form>
+
+          <div style="margin-top:22px; padding:16px; border-radius:16px; background:rgba(255,255,255,0.03); border:1px solid rgba(148,163,184,0.12);">
+            <p style="margin-bottom:10px; font-size:14px; color:#cbd5e1;">
+              👉 Szeretnél egy haladóbb, részletesebb edzéstervet + tippeket?
+              Add meg az emailed és elküldjük.
+            </p>
+
+            <form action="https://formspree.io/f/abcd1234" method="POST">
+              <input
+                type="email"
+                name="email"
+                placeholder="Add meg az email címed"
+                required
+                style="
+                  width:100%;
+                  padding:14px;
+                  border-radius:12px;
+                  margin-bottom:10px;
+                  border:1px solid rgba(148,163,184,0.2);
+                  background:rgba(3,9,19,0.6);
+                  color:white;
+                "
+              />
+
+              <button type="submit" class="button button-primary" style="width:100%;">
+                🔥 Kérem az extra tervet
+              </button>
+            </form>
+          </div>
+
+          <div class="alert">
+            Ez az edzésterv általános tájékoztató célú. Fájdalom, sérülés, szédülés vagy ismert egészségügyi probléma esetén érdemes szakemberrel vagy orvossal egyeztetni.
+          </div>
+        </div>
+
+        <div class="result-card" id="resultPanel">
+          <div class="result-placeholder">
+            <div class="result-placeholder-box">
+              <h3>Még nincs generált terved</h3>
+              <p>
+                Töltsd ki a kérdőívet, és itt megjelenik egy modern, heti bontású, kezdőbarát edzésterv, amit rögtön tesztelhetsz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bottom-grid" id="teszt">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">„Végre egy egyszerű terv, amit tényleg el tudok kezdeni.”</p>
+          <p>
+            Az MVP célja nem a tökéletes fitneszplatform, hanem az, hogy az első kattintástól az első edzésig a lehető legkisebb ellenállással jusson el a felhasználó.
+          </p>
+        </div>
+        <div class="cta-card">
+          <h3>Most már tesztelhető</h3>
+          <p>
+            Tedd fel Hostingerre vagy Netlify-ra, küldd át 5–10 ismerősnek, és figyeld meg, meddig jutnak el: görgetnek-e, kitöltik-e, rányomnak-e a generálásra, és mennyire érzik egyszerűnek az indulást.
+          </p>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Következő jó lépések: email capture, PDF export, progress tracking, gyakorlatvideók és később valódi AI-s szöveges személyre szabás.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    const EXERCISES = {
+      lowImpact: [
+        { name: "Helyben járás", type: "cardio", intensity: "low" },
+        { name: "Székes guggolás", type: "lower", intensity: "low" },
+        { name: "Falnál fekvőtámasz", type: "upper", intensity: "low" },
+        { name: "Glute bridge", type: "lower", intensity: "low" },
+        { name: "Bird-dog", type: "core", intensity: "low" },
+        { name: "Dead bug", type: "core", intensity: "low" },
+        { name: "Kar- és vállkörzés", type: "mobility", intensity: "low" },
+        { name: "Lassan végzett kitörés helyben", type: "lower", intensity: "low" },
+        { name: "Sarokemelés állva", type: "lower", intensity: "low" },
+        { name: "Térdemelés helyben", type: "cardio", intensity: "low" }
+      ],
+      beginner: [
+        { name: "Guggolás", type: "lower", intensity: "medium" },
+        { name: "Térdelő fekvőtámasz", type: "upper", intensity: "medium" },
+        { name: "Plank", type: "core", intensity: "medium" },
+        { name: "Kitörés", type: "lower", intensity: "medium" },
+        { name: "Jumping jack", type: "cardio", intensity: "medium" },
+        { name: "Mountain climber", type: "cardio", intensity: "medium" },
+        { name: "Hasprés", type: "core", intensity: "medium" },
+        { name: "Glute bridge", type: "lower", intensity: "low" },
+        { name: "Falnál ülés", type: "lower", intensity: "medium" },
+        { name: "Vállérintés plankben", type: "core", intensity: "medium" }
+      ],
+      restart: [
+        { name: "Guggolás", type: "lower", intensity: "medium" },
+        { name: "Fekvőtámasz emelt felületen", type: "upper", intensity: "medium" },
+        { name: "Plank", type: "core", intensity: "medium" },
+        { name: "Kitörés", type: "lower", intensity: "medium" },
+        { name: "Jumping jack", type: "cardio", intensity: "medium" },
+        { name: "Mountain climber", type: "cardio", intensity: "medium" },
+        { name: "Russian twist", type: "core", intensity: "medium" },
+        { name: "Glute bridge", type: "lower", intensity: "low" },
+        { name: "Burpee könnyített verzió", type: "cardio", intensity: "high" },
+        { name: "Oldalplank", type: "core", intensity: "medium" }
+      ]
+    };
+
+    const INJURY_FILTERS = {
+      térd: ["Jumping jack", "Kitörés", "Burpee könnyített verzió", "Lassan végzett kitörés helyben"],
+      hát: ["Mountain climber", "Russian twist", "Hasprés"],
+      egyéb: []
+    };
+
+    function shuffle(array) {
+      const copied = [...array];
+      for (let i = copied.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copied[i], copied[j]] = [copied[j], copied[i]];
+      }
+      return copied;
+    }
+
+    function getWorkoutStructure(daysPerWeek) {
+      if (daysPerWeek <= 3) {
+        return ["teljes test", "teljes test", "teljes test"].slice(0, daysPerWeek);
+      }
+      if (daysPerWeek === 4) {
+        return ["teljes test A", "teljes test B", "alsótest + core", "felsőtest + cardio"];
+      }
+      return ["teljes test A", "teljes test B", "alsótest + core", "felsőtest + cardio", "égető nap"];
+    }
+
+    function getTimeConfig(minutesPerWorkout, level) {
+      const beginnerMode = level === "teljesen_kezdő";
+      if (minutesPerWorkout === 15) {
+        return beginnerMode
+          ? { work: 25, rest: 35, rounds: 2, exercisesPerDay: 5 }
+          : { work: 30, rest: 30, rounds: 2, exercisesPerDay: 5 };
+      }
+      if (minutesPerWorkout === 20) {
+        return beginnerMode
+          ? { work: 30, rest: 30, rounds: 3, exercisesPerDay: 5 }
+          : { work: 35, rest: 25, rounds: 3, exercisesPerDay: 5 };
+      }
+      return beginnerMode
+        ? { work: 35, rest: 25, rounds: 3, exercisesPerDay: 6 }
+        : { work: 40, rest: 20, rounds: 3, exercisesPerDay: 6 };
+    }
+
+    function getExercisePool(level, injury) {
+      let pool;
+      switch (level) {
+        case "teljesen_kezdő":
+          pool = [...EXERCISES.lowImpact, ...EXERCISES.beginner];
+          break;
+        case "volt_már_próbálkozás":
+          pool = [...EXERCISES.beginner];
+          break;
+        case "újrakezdő":
+          pool = [...EXERCISES.restart, ...EXERCISES.beginner];
+          break;
+        default:
+          pool = [...EXERCISES.beginner];
+      }
+
+      let filtered = [...pool];
+      const forbidden = INJURY_FILTERS[injury] || [];
+      filtered = filtered.filter(ex => !forbidden.includes(ex.name));
+
+      if (level === "teljesen_kezdő") {
+        filtered = filtered.filter(ex => ex.name !== "Burpee könnyített verzió");
+      }
+      return filtered;
+    }
+
+    function getFocusTypes(dayType, goal) {
+      switch (dayType) {
+        case "teljes test":
+        case "teljes test A":
+        case "teljes test B":
+          return goal === "fogyás"
+            ? ["lower", "upper", "core", "cardio", "lower", "cardio"]
+            : ["lower", "upper", "core", "lower", "upper", "mobility"];
+        case "alsótest + core":
+          return ["lower", "lower", "core", "lower", "core", "mobility"];
+        case "felsőtest + cardio":
+          return ["upper", "upper", "cardio", "core", "cardio", "mobility"];
+        case "égető nap":
+          return ["cardio", "cardio", "lower", "core", "upper", "cardio"];
+        default:
+          return ["lower", "upper", "core", "cardio", "mobility"];
+      }
+    }
+
+    function pickExercises(pool, focusTypes, count) {
+      const selected = [];
+      const usedNames = new Set();
+
+      for (const type of focusTypes) {
+        const options = shuffle(pool.filter(ex => ex.type === type && !usedNames.has(ex.name)));
+        if (options.length > 0) {
+          selected.push(options[0]);
+          usedNames.add(options[0].name);
+        }
+        if (selected.length >= count) break;
+      }
+
+      if (selected.length < count) {
+        const filler = shuffle(pool.filter(ex => !usedNames.has(ex.name)));
+        for (const ex of filler) {
+          selected.push(ex);
+          usedNames.add(ex.name);
+          if (selected.length >= count) break;
+        }
+      }
+
+      return selected.slice(0, count);
+    }
+
+    function getDayLabel(index) {
+      return `${index + 1}. nap`;
+    }
+
+    function createWorkoutDay(dayType, pool, timeConfig, goal, dayIndex) {
+      const focusTypes = getFocusTypes(dayType, goal);
+      const exercises = pickExercises(pool, focusTypes, timeConfig.exercisesPerDay);
+
+      return {
+        day: getDayLabel(dayIndex),
+        type: dayType,
+        interval: `${timeConfig.work} mp munka / ${timeConfig.rest} mp pihenő`,
+        rounds: timeConfig.rounds,
+        exercises: exercises.map(ex => ({
+          name: ex.name,
+          type: ex.type,
+          work: `${timeConfig.work} mp`,
+          rest: `${timeConfig.rest} mp`
+        }))
+      };
+    }
+
+    function calculateBMI(weight, height) {
+      const meters = height / 100;
+      const bmi = weight / (meters * meters);
+      return bmi.toFixed(1);
+    }
+
+    function generateWeeklyPlan(profile) {
+      const structure = getWorkoutStructure(profile.daysPerWeek);
+      const timeConfig = getTimeConfig(profile.minutesPerWorkout, profile.level);
+      const pool = getExercisePool(profile.level, profile.injury);
+
+      return {
+        summary: {
+          goal: profile.goal,
+          level: profile.level,
+          daysPerWeek: profile.daysPerWeek,
+          minutesPerWorkout: profile.minutesPerWorkout,
+          injury: profile.injury,
+          bmi: calculateBMI(profile.weight, profile.height)
+        },
+        weeklyPlan: structure.map((dayType, index) => createWorkoutDay(dayType, pool, timeConfig, profile.goal, index)),
+        notes: [
+          "Minden edzés előtt 3–5 perc bemelegítés javasolt.",
+          "Minden edzés után 2–5 perc nyújtás javasolt.",
+          "Ha egy gyakorlat fájdalmat okoz, azt cserélni kell.",
+          "Kezdőként a helyes végrehajtás fontosabb, mint a sebesség.",
+          "Fogyási célhoz a rendszeres séta és az étrend is sokat számít."
+        ]
+      };
+    }
+
+    function labelGoal(goal) {
+      const map = {
+        fogyás: "Fogyás",
+        formálódás: "Formálódás",
+        mozgás_elkezdése: "Mozgás elkezdése"
+      };
+      return map[goal] || goal;
+    }
+
+    function labelLevel(level) {
+      const map = {
+        teljesen_kezdő: "Teljesen kezdő",
+        volt_már_próbálkozás: "Volt már próbálkozás",
+        újrakezdő: "Újrakezdő"
+      };
+      return map[level] || level;
+    }
+
+    function labelType(type) {
+      const map = {
+        lower: "Alsótest",
+        upper: "Felsőtest",
+        core: "Törzs",
+        cardio: "Kardió",
+        mobility: "Mobilitás"
+      };
+      return map[type] || type;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderPlan(plan) {
+      const resultPanel = document.getElementById("resultPanel");
+
+      const planHtml = plan.weeklyPlan.map(day => {
+        const exercises = day.exercises.map(ex => `
+          <div class="exercise-item">
+            <div class="exercise-main">
+              <strong>${escapeHtml(ex.name)}</strong>
+              <span>${escapeHtml(labelType(ex.type))}</span>
+            </div>
+            <div class="exercise-time">${escapeHtml(ex.work)} / ${escapeHtml(ex.rest)}</div>
+          </div>
+        `).join("");
+
+        return `
+          <article class="plan-day">
+            <div class="plan-day-head">
+              <div>
+                <strong>${escapeHtml(day.day)}</strong>
+                <span>${escapeHtml(day.type)}</span>
+              </div>
+              <div class="chip">${escapeHtml(day.interval)} · ${day.rounds} kör</div>
+            </div>
+            <div class="exercise-list">${exercises}</div>
+          </article>
+        `;
+      }).join("");
+
+      const upsell = `
+        <div class="upsell-card">
+          <h3>🔥 Ez csak az alap</h3>
+          <p>
+            Ez a terv segít elindulni. Ha komolyan gondolod, szükséged van egy teljes rendszerre.
+          </p>
+          <ul>
+            <li>✔️ teljes 7 napos program</li>
+            <li>✔️ részletes útmutató</li>
+            <li>✔️ kezdő hibák elkerülése</li>
+          </ul>
+          <button class="button button-primary" onclick="buyPro()" style="width:100%; margin-top:12px;">
+            🔥 Kérem a teljes 7 napos programot – 2990 Ft
+          </button>
+        </div>
+      `;
+
+      resultPanel.innerHTML = `
+        <h2 class="section-title">🎉 Kész! Ez a személyes terved</h2>
+        <p class="section-subtitle">Az alábbi terv a célod, az időkereted, a szinted és az esetleges érzékeny területek alapján készült.</p>
+
+        <div class="summary-grid">
+          <div class="summary-card"><span>Cél</span><strong>${escapeHtml(labelGoal(plan.summary.goal))}</strong></div>
+          <div class="summary-card"><span>Szint</span><strong>${escapeHtml(labelLevel(plan.summary.level))}</strong></div>
+          <div class="summary-card"><span>Heti edzés</span><strong>${plan.summary.daysPerWeek} nap</strong></div>
+          <div class="summary-card"><span>Edzésidő</span><strong>${plan.summary.minutesPerWorkout} perc</strong></div>
+          <div class="summary-card"><span>Érzékeny terület</span><strong>${escapeHtml(plan.summary.injury)}</strong></div>
+          <div class="summary-card"><span>BMI</span><strong>${plan.summary.bmi}</strong></div>
+        </div>
+
+        <div class="plan-stack">${planHtml}</div>
+
+        <div class="notes">
+          <h3>Fontos megjegyzések</h3>
+          <ul>${plan.notes.map(note => `<li>${escapeHtml(note)}</li>`).join("")}</ul>
+        </div>
+
+        ${upsell}
+      `;
+    }
+
+    function getProfileFromForm() {
+      return {
+        gender: document.getElementById("gender").value,
+        age: Number(document.getElementById("age").value),
+        weight: Number(document.getElementById("weight").value),
+        height: Number(document.getElementById("height").value),
+        goal: document.getElementById("goal").value,
+        level: document.getElementById("level").value,
+        daysPerWeek: Number(document.getElementById("daysPerWeek").value),
+        minutesPerWorkout: Number(document.getElementById("minutesPerWorkout").value),
+        injury: document.getElementById("injury").value
+      };
+    }
+
+    function validateProfile(profile) {
+      if (!profile.age || !profile.weight || !profile.height) {
+        return "Kérlek, tölts ki minden kötelező mezőt.";
+      }
+      if (profile.age < 16 || profile.age > 80) {
+        return "Az életkor legyen 16 és 80 év között.";
+      }
+      if (profile.weight < 35 || profile.weight > 250) {
+        return "A testsúly legyen reális tartományban.";
+      }
+      if (profile.height < 130 || profile.height > 220) {
+        return "A magasság legyen reális tartományban.";
+      }
+      return null;
+    }
+
+    function fillDemoData() {
+      document.getElementById("gender").value = "nő";
+      document.getElementById("age").value = 31;
+      document.getElementById("weight").value = 84;
+      document.getElementById("height").value = 167;
+      document.getElementById("goal").value = "fogyás";
+      document.getElementById("level").value = "teljesen_kezdő";
+      document.getElementById("daysPerWeek").value = 3;
+      document.getElementById("minutesPerWorkout").value = 20;
+      document.getElementById("injury").value = "nincs";
+    }
+
+    function triggerDemo() {
+      fillDemoData();
+      document.getElementById("workoutForm").dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+    }
+
+    function clearForm() {
+      document.getElementById("gender").value = "nő";
+      document.getElementById("age").value = 29;
+      document.getElementById("weight").value = 78;
+      document.getElementById("height").value = 168;
+      document.getElementById("goal").value = "fogyás";
+      document.getElementById("level").value = "teljesen_kezdő";
+      document.getElementById("daysPerWeek").value = 3;
+      document.getElementById("minutesPerWorkout").value = 20;
+      document.getElementById("injury").value = "nincs";
+    }
+
+    function buyPro() {
+      window.open("https://buy.stripe.com/test_00w4gt0vP35P4b77Ce6c001", "_blank");
+    }
+
+    document.getElementById("workoutForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const profile = getProfileFromForm();
+      const error = validateProfile(profile);
+
+      if (error) {
+        alert(error);
+        return;
+      }
+
+      const plan = generateWeeklyPlan(profile);
+      renderPlan(plan);
+
+      localStorage.setItem("homefit_last_profile", JSON.stringify(profile));
+      localStorage.setItem("homefit_last_plan", JSON.stringify(plan));
+
+      document.getElementById("resultPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("fillDemo").addEventListener("click", triggerDemo);
+    document.getElementById("fillHeroDemo").addEventListener("click", triggerDemo);
+    document.getElementById("clearBtn").addEventListener("click", clearForm);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedProfile = localStorage.getItem("homefit_last_profile");
+      const savedPlan = localStorage.getItem("homefit_last_plan");
+
+      if (savedProfile) {
+        try {
+          const profile = JSON.parse(savedProfile);
+          document.getElementById("gender").value = profile.gender || "nő";
+          document.getElementById("age").value = profile.age || 29;
+          document.getElementById("weight").value = profile.weight || 78;
+          document.getElementById("height").value = profile.height || 168;
+          document.getElementById("goal").value = profile.goal || "fogyás";
+          document.getElementById("level").value = profile.level || "teljesen_kezdő";
+          document.getElementById("daysPerWeek").value = profile.daysPerWeek || 3;
+          document.getElementById("minutesPerWorkout").value = profile.minutesPerWorkout || 20;
+          document.getElementById("injury").value = profile.injury || "nincs";
+        } catch (e) {
+          console.error("Profil betöltési hiba:", e);
+        }
+      }
+
+      if (savedPlan) {
+        try {
+          renderPlan(JSON.parse(savedPlan));
+        } catch (e) {
+          console.error("Terv betöltési hiba:", e);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
